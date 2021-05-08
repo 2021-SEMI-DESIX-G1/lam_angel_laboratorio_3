@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // Check if number is Palindrome
+    const checkPalindrome = (t) => {
+      if (typeof t === "string") {
+        const originalString = t;
+        const reversedString = t.split("").reverse().join("");
+        return originalString === reversedString;
+      }
+      return "Error, no es una cadena";
+    };
+
+    //Count Characters
+    const countCharacters = (t) => {
+      const stringT = t.split("");
+      const uniqueCharacters = [];
+      const countArray = [];
+      const totalCharacters = [];
+
+      // Counting process
+      for (let i = 0; i < stringT.length; i++) {
+        let characterIndex = uniqueCharacters.indexOf(stringT[i]);
+        if (characterIndex >= 0) {
+          countArray[characterIndex] += 1;
+        } else {
+          uniqueCharacters.push(stringT[i]);
+          countArray[uniqueCharacters.length - 1] = 1;
+        }
+      }
+
+      // Printing process
+      for (let i = 0; i < uniqueCharacters.length; i++) {
+        totalCharacters.push(uniqueCharacters[i] + ": " + countArray[i]);
+      }
+      totalCharacters.sort();
+      return totalCharacters;
+    };
+
+    // Check if it is leap year
+    const checkLeapYear = (a) => {
+      //Leap year is divisible by 4
+      return a % 4 === 0;
+    };
+
+    // Sum all prime numbers
+    const sumPrimes = (n) => {
+      // All prime numbers only have 2 divisors
+      if (n > 0 && n < 1000000) {
+        let sum = 0;
+        //Keep tracks of how many divisors a number has
+        for (let dividend = n - 1; dividend > 0; dividend--) {
+          let totalDivisors = 0;
+
+          for (let divisor = dividend; divisor > 0; divisor--) {
+            if (dividend % divisor === 0) {
+              totalDivisors++;
+            }
+            if (totalDivisors > 2) {
+              break;
+            }
+          }
+
+          if (totalDivisors === 2) {
+            sum += dividend;
+          }
+        }
+        return sum;
+      }
+    };
+
+    //Prints
+    console.log(
+      "El número 10101 " +
+        (checkPalindrome("10101") ? "es" : "no es") +
+        " palíndromo"
+    );
+    console.log(
+      "El número 11001 " +
+        (checkPalindrome("11001") ? "es" : "no es") +
+        " palíndromo"
+    );
+    console.log(
+      "El número 12345 " +
+        (checkPalindrome("12345") ? "es" : "no es") +
+        " palíndromo"
+    );
+    console.log(
+      "El número 2112 " +
+        (checkPalindrome("2112") ? "es" : "no es") +
+        " palíndromo"
+    );
+
+    console.log(
+      "Para la cadena 'Hola Mundo'" +
+        countCharacters("Hola Mundo")
+          .map((e) => "\n" + e)
+          .join("")
+    );
+
+    console.log(
+      "El año 2021 " + (checkLeapYear(2021) ? "es" : "no es") + " bisiesto"
+    );
+    console.log(
+      "El año 2024 " + (checkLeapYear(2024) ? "es" : "no es") + " bisiesto"
+    );
+
+    console.log("La suma de números primos antes de 20 es " + sumPrimes(20));
+    console.log("La suma de números primos antes de 7 es " + sumPrimes(7));
+  </script>
+</html>
+
+<!-- * Escribir una función que, dada una cadena "t", retorne si un número es un palíndromo de doble base o no. (Palíndromo en base 10 y base 2)-->
+<!-- * Escribir una función que, dada una cadena "t", retorne la cantidad de caracteres de la cadena. -->
+<!-- * Escribir una función que, dado un año "a", retorne si ese año es bisiesto o no.-->
+<!-- * Escribir una función que, dado un número "n" ( 0 < n < 1000000), retorne la sumatoria de todos los número primos debajo de ese número. -->
