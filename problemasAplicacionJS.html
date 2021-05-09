@@ -4,13 +4,181 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Laboratorio #3</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      a,
+      a:visited,
+      a:active {
+        text-decoration: none;
+        color: white;
+      }
+
+      /* HEADER */
+      header {
+        background-color: #0f0e0f;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 50px;
+        font-size: 1.2rem;
+        padding: 0 10px;
+      }
+
+      #github-icon {
+        width: 50px;
+      }
+
+      #author-container {
+        display: flex;
+        transition: 0.3s all;
+        align-items: center;
+      }
+
+      #author-container:hover {
+        color: #bebfc1;
+        transition: 0.3s all;
+      }
+
+      /* MAIN */
+
+      #main-container {
+        background-color: #f6f8fa;
+      }
+
+      #all-cards {
+        padding: 20px;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+      }
+
+      .card-container {
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px;
+        box-shadow: 3px 3px 1px 3px #e7e9eb;
+        width: 400px;
+      }
+
+      .card-description {
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+      }
+
+      .card-inputs {
+        display: flex;
+      }
+
+      input[type="number"],
+      input[type="text"] {
+        font-size: 1.1rem;
+        padding: 5px;
+        flex-grow: 1;
+        margin-right: 20px;
+      }
+      input[type="submit"] {
+        font-size: 1.1rem;
+        padding: 5px;
+      }
+
+      .card-outputs {
+        margin-top: 20px;
+        font-size: 1.1rem;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <a
+        target="_blank"
+        id="author-container"
+        href="https://github.com/2021-SEMI-DESIX-G1/lam_angel_laboratorio_3"
+      >
+        <img
+          src="https://www.logo.wine/a/logo/GitHub/GitHub-Icon-White-Dark-Background-Logo.wine.svg"
+          alt="github_link"
+          id="github-icon"
+        />
+        <span id="author-name">Angel Lam</span>
+      </a>
+      <div id="title-container">
+        <span>Laboratorio_3 - Problemas de aplicación usando JS</span>
+      </div>
+    </header>
+    <main id="main-container">
+      <article id="all-cards">
+        <section class="card-container">
+          <div class="card-description">
+            <h3>Función Palíndromo</h3>
+            <p>Revisar si un número es palíndromo</p>
+          </div>
+          <div class="card-inputs">
+            <input type="number" id="input-palindrome" placeholder="12345" />
+            <input type="submit" value="Revisar" onClick="resultPalindrome()" />
+          </div>
+          <div class="card-outputs">
+            <p id="palindromeResult"></p>
+          </div>
+        </section>
+        <section class="card-container">
+          <div class="card-description">
+            <h3>Función Contar Caracteres</h3>
+            <p>Revisar cuantos caracteres tiene una palabra/frase</p>
+          </div>
+          <div class="card-inputs">
+            <input type="text" id="input-characters" placeholder="Hola Mundo" />
+            <input type="submit" value="Revisar" onClick="resultCharacters()" />
+          </div>
+          <div class="card-outputs">
+            <p id="characterResults"></p>
+          </div>
+        </section>
+        <section class="card-container">
+          <div class="card-description">
+            <h3>Función Palíndromo</h3>
+            <p>Revisar si es un año bisiesto</p>
+          </div>
+          <div class="card-inputs">
+            <input type="number" id="input-year" placeholder="2021" />
+            <input type="submit" value="Revisar" onClick="resultYear()" />
+          </div>
+          <div class="card-outputs">
+            <p id="yearResults"></p>
+          </div>
+        </section>
+        <section class="card-container">
+          <div class="card-description">
+            <h3>Función Sumar Primos</h3>
+            <p>Sumar todos los números primos a partir de n</p>
+          </div>
+          <div class="card-inputs">
+            <input
+              type="number"
+              id="input-prime"
+              placeholder="10"
+              min="1"
+              max="100000"
+            />
+            <input type="submit" value="Revisar" onClick="resultPrimes()" />
+          </div>
+          <div class="card-outputs">
+            <p id="primeResults"></p>
+          </div>
+        </section>
+      </article>
+    </main>
+  </body>
   <script>
     // Check if number is Palindrome
     const checkPalindrome = (t) => {
-      if (typeof t === "string") {
+      if (typeof t === "string" && t) {
         const originalString = t;
         const reversedString = t.split("").reverse().join("");
         return originalString === reversedString;
@@ -114,6 +282,57 @@
 
     console.log("La suma de números primos antes de 20 es " + sumPrimes(20));
     console.log("La suma de números primos antes de 7 es " + sumPrimes(7));
+
+    // EXTRAS
+    const resultPalindrome = () => {
+      const value = document.getElementById("input-palindrome").value;
+      const isPalindrome =
+        typeof checkPalindrome(value) === "string"
+          ? "no es válido"
+          : checkPalindrome(value)
+          ? "es un palíndromo"
+          : "no es un palíndromo";
+      if (value) {
+        document.getElementById(
+          "palindromeResult"
+        ).innerHTML = `El número ${value} ${isPalindrome}`;
+      }
+    };
+
+    const resultCharacters = () => {
+      const value = document.getElementById("input-characters").value;
+      const characters = countCharacters(value);
+      if (value) {
+        document.getElementById("characterResults").innerHTML =
+          `Para la cadena '${value}'` +
+          countCharacters(value)
+            .map((e) => "<br>" + e)
+            .join("");
+      }
+    };
+
+    const resultYear = () => {
+      const value = document.getElementById("input-year").value;
+      const isLeapYear = checkLeapYear(value)
+        ? "es bisiesto"
+        : "no es bisiesto";
+      if (value) {
+        document.getElementById(
+          "yearResults"
+        ).innerHTML = `El año ${value} ${isLeapYear}`;
+      }
+    };
+
+    const resultPrimes = () => {
+      const value = document.getElementById("input-prime").value;
+      if (value) {
+        document.getElementById(
+          "primeResults"
+        ).innerHTML = `La suma de todos los números primos por debajo de ${value} es: ${sumPrimes(
+          value
+        )}`;
+      }
+    };
   </script>
 </html>
 
